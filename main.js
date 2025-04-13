@@ -37,7 +37,7 @@ L.control.scale({
 async function loadStations(url) {
     let response = await fetch(url);
     let jsondata = await response.json();
-    console.log(jsondata);
+    //console.log(jsondata);
     // Wetterstationen mit Icons und Popups
     L.geoJSON(jsondata, {
         attribution: "Datenquelle:",
@@ -51,9 +51,9 @@ async function loadStations(url) {
             });
         },
         onEachFeature: function (feature, layer) {
-            console.log(feature.properties);
+            console.log(feature);
             layer.bindPopup(`
-                <h4>${feature.properties.name} (${feature.properties.})</h4>
+                <h4>${feature.properties.name} (${feature.geometry.coordinates[2]})</h4>
         `);
         }
     }).addTo(overlays.stations);
