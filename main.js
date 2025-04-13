@@ -51,9 +51,9 @@ async function loadStations(url) {
             });
         },
         onEachFeature: function (feature, layer) {
-            console.log(feature);
+            //console.log(feature);
             layer.bindPopup(`
-                <h4>${feature.properties.name} (${feature.geometry.coordinates[2]})</h4>
+                <h4>${feature.properties.name} (${feature.geometry.coordinates[2]}m)</h4>
         `);
         }
     }).addTo(overlays.stations);
