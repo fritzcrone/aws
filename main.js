@@ -59,7 +59,7 @@ async function loadStations(url) {
             layer.bindPopup(`
                 <h4>${feature.properties.name} (${feature.geometry.coordinates[2]}m)</h4>
                 <ul>
-                <li>Lufttemperatur (C): ${feature.properties.LT !== undefined ? feature.properties.LT: "-"}</li>
+                <li>Lufttemperatur (C): ${feature.properties.LT !== undefined ? feature.properties.LT : "-"}</li>
                 <li>Relative Luftfeuchte (%): ${feature.properties.RH || "-"}</li>
                 <li>Windgeschwindigkeit (km/h): ${feature.properties.WG || "-"}</li>
                 <li>Schneehöhe (cm): ${feature.properties.HS || "-"}</li>
@@ -73,21 +73,35 @@ async function loadStations(url) {
 
 loadStations("https://static.avalanche.report/weather_stations/stations.geojson");
 
-function showTemperature(jsondata){
+function showTemperature(jsondata) {
     L.geoJSON(jsondata, {
-        filter: function(feature) {
-            if (feature.properties.LT > -50&& feature.properties.LT < 50) {
+        filter: function (feature) {
+            if (feature.properties.LT > -50 && feature.properties.LT < 50) {
                 return true;
             }
         },
-        pointToLayer: function(feature,latlng) {
+        pointToLayer: function (feature, latlng) {
+            let color = getColor(feature.properties.LT, COLORS.temperature);
             return L.marker(latlng, {
                 icon: L.divIcon({
                     className: "aws-div-icon",
-                    html: `<span>${feature.properties.LT}</span>`
+                    html: `<span style="background-color:${color}">${feature.properties.LT}</span>`
                 }),
             })
         },
-            
+
     }).addTo(overlays.temperature);
 }
+
+//console.log(COLORS);
+function getColor(value, ramp) {
+    for (let rule of ramp) {
+        //console.log("rule", rule);
+        if (value >= rule.min && value < rule.max) {
+            return rule.color;
+        }
+    }
+}
+
+//let testColor = getColor(-3, COLORS.temperature);
+//console.log("TestColor fuer temp -3", testColor);
