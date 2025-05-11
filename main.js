@@ -14,7 +14,8 @@ let map = L.map("map").setView([ibk.lat, ibk.lng], ibk.zoom);
 let overlays = {
     stations: L.featureGroup(),
     temperature: L.featureGroup(),
-    windspeed: L.featureGroup().addTo(map),
+    windspeed: L.featureGroup(),
+    snow: L.featureGroup().addTo(map),
 }
 
 // Layer control
