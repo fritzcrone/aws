@@ -74,6 +74,7 @@ async function loadStations(url) {
     }).addTo(overlays.stations);
     showTemperature(jsondata);
     showWindspeed(jsondata);
+    showSchneehöhe(jsondata);
 }
 
 loadStations("https://static.avalanche.report/weather_stations/stations.geojson");
@@ -116,6 +117,26 @@ function showWindspeed(jsondata) {
         },
 
     }).addTo(overlays.windspeed);
+}
+
+function showSchneehöhe(jsondata) {
+    L.geoJSON(jsondata, {
+        filter: function (feature) {
+            if (feature.properties.HS > 0 && feature.properties.HS < 500) {
+                return true;
+            }
+        },
+        pointToLayer: function (feature, latlng) {
+            let colorHS = getColor(feature.properties.HS, COLORS.snow);
+            return L.marker(latlng, {
+                icon: L.divIcon({
+                    className: "aws-div-icon-snow",
+                    html: `<span style="background-color:${colorHS}">${feature.properties.HS.toFixed(1)}</span>`
+                }),
+            })
+        },
+
+    }).addTo(overlays.snow);
 }
 
 //console.log(COLORS);
