@@ -43,7 +43,7 @@ L.control.scale({
 async function loadStations(url) {
     let response = await fetch(url);
     let jsondata = await response.json();
-    //console.log(jsondata);
+    console.log(jsondata);
     // Wetterstationen mit Icons und Popups
     L.geoJSON(jsondata, {
         attribution: "Datenquelle:",
@@ -74,7 +74,7 @@ async function loadStations(url) {
     }).addTo(overlays.stations);
     showTemperature(jsondata);
     showWindspeed(jsondata);
-    showSchneehöhe(jsondata);
+    showSnow(jsondata);
 }
 
 loadStations("https://static.avalanche.report/weather_stations/stations.geojson");
@@ -119,7 +119,8 @@ function showWindspeed(jsondata) {
     }).addTo(overlays.windspeed);
 }
 
-function showSchneehöhe(jsondata) {
+function showSnow(jsondata) {
+   
     L.geoJSON(jsondata, {
         filter: function (feature) {
             if (feature.properties.HS > 0 && feature.properties.HS < 500) {
@@ -127,11 +128,11 @@ function showSchneehöhe(jsondata) {
             }
         },
         pointToLayer: function (feature, latlng) {
-            let colorHS = getColor(feature.properties.HS, COLORS.snow);
+            let colorHS = getColor(feature.properties.HS, COLORSSNOW.snow);
             return L.marker(latlng, {
                 icon: L.divIcon({
                     className: "aws-div-icon-snow",
-                    html: `<span style="background-color:${colorHS}">${feature.properties.HS.toFixed(1)}</span>`
+                    html: `<span style="background-color:${colorSnow}">${feature.properties.HS.toFixed(1)}</span>`
                 }),
             })
         },
