@@ -132,7 +132,7 @@ function showSnow(jsondata) {
             return L.marker(latlng, {
                 icon: L.divIcon({
                     className: "aws-div-icon-snow",
-                    html: `<span style="background-color:${colorSnow}">${feature.properties.HS.toFixed(1)}</span>`
+                    html: `<span style="background-color:${colorHS}">${feature.properties.HS.toFixed(1)}</span>`
                 }),
             })
         },
