@@ -45,7 +45,7 @@ L.control.scale({
 async function loadStations(url) {
     let response = await fetch(url);
     let jsondata = await response.json();
-    console.log(jsondata);
+    //console.log(jsondata);
     // Wetterstationen mit Icons und Popups
     L.geoJSON(jsondata, {
         attribution: "Datenquelle:",
@@ -149,12 +149,14 @@ function showDirection(jsondata) {
                 return true;
             }
         },
+        
         pointToLayer: function (feature, latlng) {
-            let colorWR = getColor(feature.properties.WR, COLORSDR.direction);
+            //let colorWG = getColor(feature.properties.WG, COLORSWG.windspeed);
+            let colorWG = getColor(feature.properties.WG, COLORSWG.windspeed);
             return L.marker(latlng, {
                 icon: L.divIcon({
-                    className: "aws-div-arrowicon-direction",
-                    html: `<span style="background-color:${colorWR}">${feature.properties.WR.toFixed(1)}</span>`
+                    className: "aws-div-icon-wind",
+                    html: `<span style="background-color:${colorWG}">${feature.properties.WR.toFixed(1)}</span>`
                 }),
             })
         },
