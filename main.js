@@ -151,12 +151,34 @@ function showDirection(jsondata) {
         },
         
         pointToLayer: function (feature, latlng) {
+           let iconName;
+           if (feature.properties.WR > 337.5 && feature.properties.WR < 360) {
+            iconName = "N";
+           } else if (feature.properties.WR > 0 && feature.properties.WR < 22.5) {
+            iconName = "N";
+           } else if (feature.properties.WR > 22.5 && feature.properties.WR < 67.5) {
+            iconName = "NO";
+           } else if (feature.properties.WR > 67.5 && feature.properties.WR < 112.5) {
+            iconName = "O";
+           } else if (feature.properties.WR > 112.5 && feature.properties.WR < 157.5) {
+            iconName = "SO";
+           } else if (feature.properties.WR > 157.5 && feature.properties.WR < 202.5) {
+            iconName = "S";
+           } else if (feature.properties.WR > 202.5 && feature.properties.WR < 247.5) {
+            iconName = "SW";
+           } else if (feature.properties.WR > 247.5 && feature.properties.WR < 292.5) {
+            iconName = "W";
+           } else if (feature.properties.WR > 292.5 && feature.properties.WR < 337.5) {
+            iconName = "NW";
+           } else {
+            iconName = "null";
+           }
             //let colorWG = getColor(feature.properties.WG, COLORSWG.windspeed);
             let colorWG = getColor(feature.properties.WG, COLORSWG.windspeed);
             return L.marker(latlng, {
                 icon: L.divIcon({
                     className: "aws-div-icon-wind",
-                    html: `<span style="background-color:${colorWG}">${feature.properties.WR.toFixed(1)}</span>`
+                    html: `<span style="background-color:${colorWG}">${iconName}</span>`
                 }),
             })
         },
