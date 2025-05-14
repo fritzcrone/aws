@@ -101,19 +101,3 @@ footer nav {
         1px -1px 0 white,
         1px -1px 0 white;
 }
-
-.aws-div-arrowicon-north span {
-    background-color: lightblue;
-}
-
-.aws-div-arrowicon-east span {
-    background-color: lightgreen;
-}
-
-.aws-div-arrowicon-south span {
-    background-color: lightcoral;
-}
-
-.aws-div-arrowicon-west span {
-    background-color: lightgoldenrodyellow;
-}
