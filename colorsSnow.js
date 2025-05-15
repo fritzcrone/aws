@@ -1,5 +1,6 @@
 const COLORSSNOW = {
     snow: [
+        {min: 0 , max: 0 , color: "white"},
         {min: 0 , max: 5, color: "#ffffb2"},
         {min: 5 , max: 10, color: "#b0ffbc"},
         {min: 10 , max: 20, color: "#8cffff"},

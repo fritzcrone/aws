@@ -137,7 +137,7 @@ function showWindspeed(jsondata) {
 function showSnow(jsondata) {
     L.geoJSON(jsondata, {
         filter: function (feature) {
-            if (feature.properties.HS > 0 && feature.properties.HS < 500) {
+            if (feature.properties.HS > 0 && feature.properties.HS < 5000) {
                 return true;
             }
         },
@@ -157,16 +157,16 @@ function showSnow(jsondata) {
 function showDirection(jsondata) {
     L.geoJSON(jsondata, {
         filter: function (feature) {
-            if (feature.properties.WR > 0 && feature.properties.WR < 360) {
+            if (feature.properties.WR > 0 && feature.properties.WR <= 360) {
                 return true;
             }
         },
 
         pointToLayer: function (feature, latlng) {
             let iconName;
-            if (feature.properties.WR > 337.5 && feature.properties.WR < 360) {
+            if (feature.properties.WR > 337.5 && feature.properties.WR <= 360) {
                 iconName = "N";
-            } else if (feature.properties.WR > 0 && feature.properties.WR < 22.5) {
+            } else if (feature.properties.WR >= 0 && feature.properties.WR < 22.5) {
                 iconName = "N";
             } else if (feature.properties.WR > 22.5 && feature.properties.WR < 67.5) {
                 iconName = "NO";
